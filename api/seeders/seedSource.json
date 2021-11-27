@@ -1,26 +1,32 @@
 [
-    {
-        "model": "role",
-        "data": [
-            {
-                "displayName": "Admin",
-                "name": "admin"
-            }
-        ]
-    },
-    {
-        "model": "user",
-        "data": [
-            {
-                "name": "Admin",
-                "email": "admin@hclEvent.com",
-                "password": "password"
-            },
-            {
-                "name": "Second Admin",
-                "email": "admin2@hclEvent.com",
-                "password": "password"
-            }
-        ]
-    }
+   {
+       "title": " In Search of Lost Time",
+       "author": "Marcel Proust",
+       "fee": 100
+   },
+   {
+       "title": "Ulysses",
+       "author": "James Joyce",
+       "fee": 200
+   },
+   {
+       "title": "Don Quixote",
+       "author": "Miguel de Cervantes",
+       "fee": 300
+   },
+   {
+       "title": " One Hundred Years of Solitude",
+       "author": "Gabriel",
+       "fee": 400
+   },
+   {
+       "title": " The Great Gatsby",
+       "author": "Fcott",
+       "fee": 600
+   },
+   {
+       "title": "Moby Dick",
+       "author": "Herman",
+       "fee": 390
+   }
 ]
