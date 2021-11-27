@@ -58,7 +58,6 @@ const userSchema = new Schema(
     }
 );
 
-// hook before data is saved
 userSchema.pre('save', async function (next) {
     const userDocument = this;
     if(userDocument.isModified()) {
