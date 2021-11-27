@@ -5,7 +5,8 @@ class BookService {
 
     }
 
-    list(queryOption, sortOption, page, limit) {
+    list(searchBy, sortOption, page, limit) {
+        let queryOption = searchBy ? { $or:[{title: searchBy}, {author: searchBy}, {category: searchBy}] } : {};
         return Book.find(queryOption)
                             .sort(sortOption)
                             .skip((parseInt(page, 10) - 1) * parseInt(limit, 10))

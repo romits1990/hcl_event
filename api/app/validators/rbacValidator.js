@@ -1,6 +1,6 @@
 const responseHandler = require("../helpers/responseHelper");
 const staticRoles = require("../configurations/staticRoles").config;
-const debug = require('debug')('erm:permission');
+const debug = require('debug')('erm:rbac');
 
 const canUserAccess = (role) => {
     if(!role){
@@ -11,7 +11,7 @@ const canUserAccess = (role) => {
 
 module.exports = async (req, res, next) => {
     try {
-        const { authorization = null } = req.headers;
+        const { authorization = '' } = req.headers || {};
             
         let roleNameToCompareWith = authorization.replace('ROLE_TOKEN_', '').toLowerCase().trim();
         if(canUserAccess(roleNameToCompareWith)) {
