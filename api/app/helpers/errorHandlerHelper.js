@@ -1,0 +1,11 @@
+const responseHandler = require("./responseHelper");
+
+module.exports = (error, req, res, next) => {
+    if (error instanceof SyntaxError && error.status === 400 && 'body' in error) {
+        let errorMessage = 'Invalid json body';
+        responseHandler.handleErrorResponse({ }, res, "BAD_REQUEST", errorMessage);
+    }
+    else {
+        next();
+    }
+}

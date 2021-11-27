@@ -1,0 +1,16 @@
+if(process.env.NODE_ENV!=='production') {
+    require('dotenv').config();
+}
+
+/**
+ * Database Module dependencies.
+ */
+ const mongoose = require('mongoose');
+ 
+ /**
+  * Create Database connection
+  */
+mongoose.connect(process.env.DATABASE_URL);
+const dbConnection = mongoose.connection;
+
+module.exports = dbConnection;

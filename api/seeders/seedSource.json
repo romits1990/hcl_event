@@ -1,0 +1,26 @@
+[
+    {
+        "model": "role",
+        "data": [
+            {
+                "displayName": "Admin",
+                "name": "admin"
+            }
+        ]
+    },
+    {
+        "model": "user",
+        "data": [
+            {
+                "name": "Admin",
+                "email": "admin@hclEvent.com",
+                "password": "password"
+            },
+            {
+                "name": "Second Admin",
+                "email": "admin2@hclEvent.com",
+                "password": "password"
+            }
+        ]
+    }
+]
