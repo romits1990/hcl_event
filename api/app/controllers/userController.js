@@ -3,11 +3,12 @@ const responseHandler = require('../helpers/responseHelper');
 const User = require('../models/userModel');
 const Role = require('../models/roleModel');
 
+const userService = require('../services/userService');
+const userServiceInstance = new userService();
+
 exports.create = async (req, res, next) => {
   try {
-    let { name = null, email = null, password = null, role = null } = req.body || {};
-    let newUser = new User({name: name, email: email, password: password, role: role});
-    await newUser.save();
+    let newUser = await userServiceInstance.create(req.body);
     responseHandler.handleSuccessResponse(newUser, res, "RESOURCE_CREATED", 'User created successfully.')
   }
   catch(error) {
@@ -20,10 +21,8 @@ exports.listUsers = async (req, res, next) => {
     let { page = 1, limit = 10, sortDirection = 'desc', searchQuery = '' } = req.query || {};
     let sortOption = { createdAt: sortDirection };
     let queryOption = searchQuery.length > 0 ? { name: new RegExp(searchQuery, 'i') } : {};
-    let allUsers = await User.find(queryOption)
-                             .sort(sortOption)
-                             .skip((parseInt(page, 10) - 1) * parseInt(limit, 10))
-                             .limit(parseInt(limit, 10)).lean().exec();
+    let listingOptions = [queryOption, sortOption, page, limit];
+    let allUsers = await userServiceInstance.list(...listingOptions);
     let message = allUsers.length > 0 ? 'Data found.' : 'No Data found.';
     responseHandler.handleSuccessResponse(allUsers, res, 'SUCCESS', message);
   }
@@ -35,7 +34,7 @@ exports.listUsers = async (req, res, next) => {
 exports.userDetails = async (req, res, next) => {
   try {
     let { id } = req.params;
-    let user = await User.findById(id).lean().exec();
+    let user = await userServiceInstance.getUserById(id);
     if(user!==null) {
       let message = 'Data found.';
       responseHandler.handleSuccessResponse(user || {}, res, 'SUCCESS', message);
@@ -51,7 +50,7 @@ exports.userDetails = async (req, res, next) => {
 
 exports.userCount = async (req, res, next) => {
   try {
-    let userCount = await User.countDocuments();
+    let userCount = await userServiceInstance.getUserCount();
     let response = { count: userCount };
     responseHandler.handleSuccessResponse(response, res, 'SUCCESS');
   }
@@ -64,11 +63,10 @@ exports.update = async (req, res, next) => {
   try {
     let { id: userId = null } = req.params;
     let { name = null, role = null } = req.body || {};
-    let userCount = await User.countDocuments({ _id: userId });
+    let userCount = await userServiceInstance.getUserCount({ _id: userId });
     if(userCount===1) {
-      let query = { _id: userId };
       let dataToUpdate = { name: name, role: role };
-      let updatedUserResponse = await User.updateOne(query, { $set: dataToUpdate }, { new: true });
+      let updatedUserResponse = await userServiceInstance.updateUserById(userId, dataToUpdate);
       let successMessage = updatedUserResponse.modifiedCount > 0 ? "User updated successfully." : "Nothing to update";
       responseHandler.handleSuccessResponse({}, res, "SUCCESS", successMessage);
     }
@@ -84,9 +82,9 @@ exports.update = async (req, res, next) => {
 exports.delete = async (req, res, next) => {
   try {
     let { id: userId = null } = req.params;
-    let user = await User.findById(userId).populate({ path: 'role', match: { name: { $ne: 'admin' } } });
+    let user = await userServiceInstance.getNonAdminUserById(userId);
     if(user?.role) {
-      let deleteResponse = await User.deleteOne({_id: userId});
+      let deleteResponse = await userServiceInstance.deleteUserById(userId);
       responseHandler.handleSuccessResponse({}, res, "SUCCESS_NO_CONTENT");
     }
     else {
