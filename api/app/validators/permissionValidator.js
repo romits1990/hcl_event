@@ -1,6 +1,6 @@
 const responseHandler = require("../helpers/responseHelper");
 const Permission = require("../models/permissionModel");
-const debug = require('debug')('erm:permission');
+const debug = require('debug')('hcl:permission');
 
 const canUserAccess = async (userId, roleId, req) => {
     let { method, path, baseUrl  } = req;

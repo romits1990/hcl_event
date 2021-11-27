@@ -2,7 +2,7 @@ if(process.env.NODE_ENV!=='production') {
     require('dotenv').config();
 }
 
-const debug = require('debug')('erm:seed');
+const debug = require('debug')('hcl:seed');
 
 const dbConnection = require('../bin/dbConnection');
 dbConnection.on('open', async () => {

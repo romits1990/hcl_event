@@ -9,7 +9,7 @@ if(process.env.NODE_ENV!=='production') {
  */
 
 const app = require('../app');
-const debug = require('debug')('erm:server');
+const debug = require('debug')('hcl:server');
 const http = require('http');
 
 /**

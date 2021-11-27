@@ -1,4 +1,4 @@
-const debug = require('debug')('erm:USER_CONTROLLER');
+const debug = require('debug')('hcl:USER_CONTROLLER');
 const responseHandler = require('../helpers/responseHelper');
 const User = require('../models/userModel');
 const Role = require('../models/roleModel');
@@ -97,32 +97,6 @@ exports.delete = async (req, res, next) => {
     responseHandler.handleErrorResponse(error, res);
   }
 }
-
-exports.changePassword = async (req, res, next) => {
-  try {
-    let { email = null, password = null, newPassword = null } = req.body || {};
-    let user = await User.findOne({ email: email });
-    if(user?.password) {
-      let userAuthStatus = await User.verifyPassword(user?.password, password);
-      if(userAuthStatus===true) {
-        let query = { email: email };
-        let dataToUpdate = { password: newPassword };
-        let updatedUserResponse = await User.updateOne(query, { $set: dataToUpdate }, { new: true });
-        let successMessage = updatedUserResponse.modifiedCount > 0 ? "Password changed successfully." : "Nothing to update";
-        responseHandler.handleSuccessResponse({}, res, "SUCCESS_NO_CONTENT", successMessage)
-      }
-      else {
-        responseHandler.handleErrorResponse({}, res, 'UNAUTHORIZED', 'Please input your old password properly.');
-      }
-    }
-    else {
-      responseHandler.handleErrorResponse({}, res, 'NOT_FOUND', "User doesn't exist.");
-    }
-  }
-  catch(error) {
-    responseHandler.handleErrorResponse(error, res);
-  }
-};
 
 exports.authenticate = async (req, res, next) => {
   try {

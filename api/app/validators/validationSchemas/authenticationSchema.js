@@ -1,6 +1,5 @@
 exports.schema = {
     email: {
-        normalizeEmail: true,
         trim: true,
         exists: true,
         isEmail: true,
