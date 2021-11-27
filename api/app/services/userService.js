@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const Role = require('../models/roleModel');
 
 class UserService {
     constructor() {
