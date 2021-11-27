@@ -1,0 +1,23 @@
+<h2>Books</h2>
+
+<label for="">Search here</label>
+<input type="text" #bookSearch class="form-control" placeholder="Search with author, title and category" />
+
+<table>
+    <tr>
+        <th>Serial No</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Fee</th>
+        <th>Status</th>
+    </tr>
+    <tr *ngFor="let book of bookList; let i = index;">
+        <td>{{i+1}}</td>
+        <td>{{book?.title}}</td>
+        <td>{{book?.author}}</td>
+        <td>{{book?.category}}</td>
+        <td>{{book?.fee | currency:'INR'}}</td>
+        <td>{{book?.borrowedStatus ? 'Not Available' : 'Available' }}</td>
+    </tr>
+</table>

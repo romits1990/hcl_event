@@ -4,23 +4,19 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { RouteModule } from './router/route.module';
-import { AuthenticationModule } from './authentication/authentication.module';
-import { UserModule } from './user/user.module';
-import { MainComponent } from './main/main.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { BookListComponent } from './book-list/book-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    BookListComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouteModule,
-    AuthenticationModule,
-    UserModule
+    RouteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
