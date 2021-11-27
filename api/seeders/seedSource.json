@@ -2,31 +2,37 @@
    {
        "title": " In Search of Lost Time",
        "author": "Marcel Proust",
-       "fee": 100
+       "fee": 100,
+       "status": "borrowed"
    },
    {
        "title": "Ulysses",
        "author": "James Joyce",
-       "fee": 200
+       "fee": 200,
+       "status": "available"
    },
    {
        "title": "Don Quixote",
        "author": "Miguel de Cervantes",
-       "fee": 300
+       "fee": 300,
+       "status": "available"
    },
    {
        "title": " One Hundred Years of Solitude",
        "author": "Gabriel",
-       "fee": 400
+       "fee": 400,
+       "status": "available"
    },
    {
        "title": " The Great Gatsby",
        "author": "Fcott",
-       "fee": 600
+       "fee": 600,
+       "status": "borrowed"
    },
    {
        "title": "Moby Dick",
        "author": "Herman",
-       "fee": 390
+       "fee": 390,
+       "status": "available"
    }
 ]

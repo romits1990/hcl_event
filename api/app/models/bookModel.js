@@ -22,6 +22,11 @@ const bookSchema = new Schema(
             type: Number,
             required: true,
             trim: true
+        },
+        borrowedStatus: {
+            type: Boolean,
+            required: true,
+            default: false
         }
     },
     {
